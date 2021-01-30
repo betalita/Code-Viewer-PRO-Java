@@ -1,0 +1,10 @@
+<resources>
+	<style name="Theme.CodeViewerPRO" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+		<item name="colorPrimary">@color/yellow</item>
+		<item name="colorOnPrimary">@color/white</item>
+		<item name="backgroundColor">@color/dark_grey</item>
+		<item name="android:textColorPrimary">@color/white</item>
+		<item name="android:textColorSecondary">@color/light_grey</item>
+		<item name="fontFamily">@font/montserrat</item>
+	</style>
+</resources>

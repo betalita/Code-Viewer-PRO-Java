@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="yellow">#DFBE12</color>
+	<color name="white">#FFFFFF</color>
+	<color name="light_grey">#A9A9A9</color>
+	<color name="dark_grey">#313131</color>
+	<color name="grey">#515151</color>
+	<color name="color_java">#FFE600</color>
+	<color name="color_bat">#00D1FF</color>
+	<color name="color_css">#BD00FF</color>
+	<color name="color_xml">#FF5C00</color>
+	<color name="color_fxml">#FF5C00</color>
+</resources>
