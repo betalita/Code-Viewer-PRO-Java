@@ -1,5 +1,6 @@
 package com.pointlessapps.codeviewerpro.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -30,5 +31,11 @@ public class ActivityExample extends AppCompatActivity {
 				.get(ViewModelExample.class);
 
 		viewModel.prepareSnippetsList();
+		viewModel.setOnShowSnippetListener(codeSnippet -> startActivity(
+				new Intent(this, ActivityViewer.class)
+						.putExtra(ActivityViewer.KEY_SOURCE_CODE, codeSnippet.getSource())
+						.putExtra(ActivityViewer.KEY_FILENAME, codeSnippet.getFilename())
+						.putExtra(ActivityViewer.KEY_EXTENSION, codeSnippet.getExtension())
+		));
 	}
 }

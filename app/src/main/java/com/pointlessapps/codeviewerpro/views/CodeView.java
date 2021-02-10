@@ -10,6 +10,7 @@ import android.util.TypedValue;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.pointlessapps.codeviewerpro.utils.Utils;
@@ -44,9 +45,8 @@ public class CodeView extends AppCompatTextView {
 	private void calculatePadding() {
 		Rect rect = new Rect();
 		lineNumberPaint.getTextBounds("0", 0, 1, rect);
-		float numberWidth = rect.width();
 		setPadding(
-				(int) (lineNumberPadding * 2 + minVisibleNumbers * numberWidth),
+				(int) (lineNumberPadding * 2 + minVisibleNumbers * (float) rect.width()),
 				getPaddingTop(),
 				getPaddingRight(),
 				getPaddingBottom()

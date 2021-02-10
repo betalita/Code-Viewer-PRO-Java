@@ -27,7 +27,7 @@ public class ActivityMain extends AppCompatActivity {
 
 		viewModel.prepareClickListeners();
 		viewModel.setOnFileChosenListener((content, filename, extension) -> startActivity(
-				(new Intent(this, ActivityViewer.class))
+				new Intent(this, ActivityViewer.class)
 						.putExtra(ActivityViewer.KEY_SOURCE_CODE, content)
 						.putExtra(ActivityViewer.KEY_FILENAME, filename)
 						.putExtra(ActivityViewer.KEY_EXTENSION, extension)

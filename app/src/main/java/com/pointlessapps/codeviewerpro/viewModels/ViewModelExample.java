@@ -1,6 +1,5 @@
 package com.pointlessapps.codeviewerpro.viewModels;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 
 import androidx.lifecycle.AndroidViewModel;
@@ -13,21 +12,29 @@ import com.pointlessapps.codeviewerpro.models.Example;
 
 public class ViewModelExample extends AndroidViewModel {
 
-	@SuppressLint("StaticFieldLeak")
-	private final Activity activity;
 	private final ActivityExampleBinding binding;
 	private final Example example;
+	private OnShowSnippetListener onShowSnippetListener;
 
 	public ViewModelExample(Activity activity, ActivityExampleBinding binding, Example example) {
 		super(activity.getApplication());
-		this.activity = activity;
 		this.binding = binding;
 		this.example = example;
 	}
 
 	public void prepareSnippetsList() {
-		binding.listSnippets.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.VERTICAL, false));
-		binding.listSnippets.setAdapter(new AdapterExampleSnippets(example.getCodeSnippets()));
+		binding.listSnippets.setLayoutManager(new LinearLayoutManager(getApplication().getApplicationContext(), RecyclerView.VERTICAL, false));
+		AdapterExampleSnippets adapter = new AdapterExampleSnippets(example.getCodeSnippets());
+		adapter.setOnClickListener(i -> onShowSnippetListener.invoke(example.getCodeSnippets().get(i)));
+		binding.listSnippets.setAdapter(adapter);
 		binding.listSnippets.setItemViewCacheSize(example.getCodeSnippets().size());
+	}
+
+	public void setOnShowSnippetListener(OnShowSnippetListener onShowSnippetListener) {
+		this.onShowSnippetListener = onShowSnippetListener;
+	}
+
+	public interface OnShowSnippetListener {
+		void invoke(Example.CodeSnippet codeSnippet);
 	}
 }

@@ -1,6 +1,5 @@
 package com.pointlessapps.codeviewerpro.viewModels;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 
 import androidx.lifecycle.AndroidViewModel;
@@ -16,17 +15,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressLint("StaticFieldLeak")
 public class ViewModelExamples extends AndroidViewModel {
 
-	private final Activity activity;
 	private final ActivityExamplesBinding binding;
 	private List<Example> data;
 	private OnShowExampleListener onShowExampleListener;
 
 	public ViewModelExamples(Activity activity, ActivityExamplesBinding binding) {
 		super(activity.getApplication());
-		this.activity = activity;
 		this.binding = binding;
 
 		try {
@@ -37,7 +33,7 @@ public class ViewModelExamples extends AndroidViewModel {
 	}
 
 	public void prepareExamplesList() {
-		binding.listExamples.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.VERTICAL, false));
+		binding.listExamples.setLayoutManager(new LinearLayoutManager(getApplication().getApplicationContext(), RecyclerView.VERTICAL, false));
 		AdapterExample adapter = new AdapterExample(data);
 		adapter.setOnClickListener(i -> onShowExampleListener.invoke(data.get(i)));
 		binding.listExamples.setAdapter(adapter);

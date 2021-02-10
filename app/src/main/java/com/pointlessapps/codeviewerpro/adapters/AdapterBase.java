@@ -1,6 +1,5 @@
 package com.pointlessapps.codeviewerpro.adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -9,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 import java.util.List;
 
 public abstract class AdapterBase<T, Binding extends ViewBinding> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -40,12 +38,8 @@ public abstract class AdapterBase<T, Binding extends ViewBinding> extends Recycl
 					boolean.class
 			).invoke(null, LayoutInflater.from(parent.getContext()), parent, false);
 
-			if (binding == null) {
-				return null;
-			}
-
-			return new RecyclerView.ViewHolder(binding.getRoot()) {
-			};
+			assert binding != null;
+			return new RecyclerView.ViewHolder(binding.getRoot()) { };
 
 		} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
 			return null;
@@ -55,7 +49,11 @@ public abstract class AdapterBase<T, Binding extends ViewBinding> extends Recycl
 	@Override
 	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 		onBind(binding, position);
-		binding.getRoot().setOnClickListener(v -> onClickListener.invoke(position));
+		binding.getRoot().setOnClickListener(v -> {
+			if (onClickListener != null) {
+				onClickListener.invoke(position);
+			}
+		});
 	}
 
 	@Override
