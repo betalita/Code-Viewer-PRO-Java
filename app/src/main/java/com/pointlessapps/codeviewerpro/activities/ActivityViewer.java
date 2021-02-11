@@ -3,7 +3,6 @@ package com.pointlessapps.codeviewerpro.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,12 +32,10 @@ public class ActivityViewer extends AppCompatActivity {
 			Uri data = getIntent().getData();
 			assert data != null;
 			String path = Utils.getPath(this, data);
-			Log.d("LOG!", "path: " + path);
 			if (path != null) {
 				filename = Utils.getFilename(this, data);
 				source = Utils.getFileContentFromPath(path);
 				extension = Utils.getExtension(path);
-				Log.d("LOG!", "filename: " + filename + " source: " + source + " extension: " + extension);
 			}
 		}
 

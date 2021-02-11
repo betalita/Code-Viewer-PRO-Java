@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.OpenableColumns;
-import android.util.Log;
 import android.util.TypedValue;
 
 import androidx.annotation.ColorInt;
@@ -52,7 +51,6 @@ public class Utils {
 			case "content":
 				Cursor query = context.getContentResolver().query(uri, new String[]{"_data"}, null, null, null);
 				if (query != null) {
-					Log.d("LOG!", "query: " + query.toString());
 					int index = query.getColumnIndex("_data");
 					if (index != -1 && query.moveToFirst()) {
 						return query.getString(index);

@@ -40,7 +40,6 @@ public abstract class AdapterBase<T, Binding extends ViewBinding> extends Recycl
 
 			assert binding != null;
 			return new RecyclerView.ViewHolder(binding.getRoot()) { };
-
 		} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
 			return null;
 		}
